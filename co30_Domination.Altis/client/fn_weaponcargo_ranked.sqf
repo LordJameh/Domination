@@ -73,11 +73,8 @@ __TRACE_1("OPTICS","_helperar")
 _helperar append (d_misc_hash get (_rank + "_MUZZLES"));
 __TRACE_1("MUZZLES","_helperar")
 
-if ((d_misc_hash getOrDefault ["private_uniforms", []]) isEqualTo []) then {
-	_helperar append d_usave;
-} else {
-	_helperar append (d_misc_hash get (_rank + "_UNIFORMS"));
-};
+_helperar append (d_misc_hash get (_rank + "_UNIFORMS"));
+
 __TRACE_1("UNIFORMS","_helperar")
 
 _helperar append (d_misc_hash get (_rank + "_ITEMS"));

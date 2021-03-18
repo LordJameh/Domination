@@ -15,7 +15,11 @@ private _all_weapons_items_blufor = [
 		[
 			"rhs_weap_m16a4",
 			"rhs_weap_m16a4_carryhandle",
-			"rhs_weap_m16a4_pmag"
+			"rhs_weap_m16a4_pmag",
+			"rhs_weap_m14",
+			"rhs_weap_m14_d",
+			"rhs_weap_m14_wd",
+			"rhs_weap_m14_fiberglass"
 		],
 		// corporal rifles (gets added to private rifles)
 		[
@@ -256,7 +260,23 @@ private _all_weapons_items_blufor = [
 			"rhs_weap_sr25_d",
 			"rhs_weap_sr25_ec",
 			"rhs_weap_sr25_ec_d",
-			"rhs_weap_m14ebrri"
+			"rhs_weap_m14ebrri",
+			"rhs_weap_mk17_CQC",
+			"rhs_weap_mk17_LB",
+			"rhs_weap_mk17_STD",
+			"rhs_weap_m14_rail",
+			"rhs_weap_m14_rail_d",
+			"rhs_weap_m14_rail_fiberglass",
+			"rhs_weap_m14_rail_wd",
+			"rhs_weap_m14_ris",
+			"rhs_weap_m14_ris_d",
+			"rhs_weap_m14_ris_fiberglass",
+			"rhs_weap_m14_ris_wd",
+			"rhs_weap_m14_socom",
+			"rhs_weap_m14_socom_rail",
+			"rhs_weap_l1a1",
+			"rhs_weap_l1a1_wood",
+			"rhs_weap_mg42"
 		],
 		// captain rifles (gets added...)
 		[
@@ -420,7 +440,8 @@ private _all_weapons_items_blufor = [
 			"optic_MRD","optic_MRCO",
 			"optic_ERCO_khk_F",
 			"optic_ERCO_blk_F",
-			"optic_ERCO_snd_F"
+			"optic_ERCO_snd_F",
+			"rhsgref_mg42_acc_aasight"
 		],
 		// captain optics
 		[
@@ -444,7 +465,8 @@ private _all_weapons_items_blufor = [
 		// private muzzles
 		[
 			"rhsusf_acc_SF3P556",
-			"rhsusf_acc_SFMB556"
+			"rhsusf_acc_SFMB556",
+			"rhsusf_acc_m14_flashsuppresor"
 		],
 		// corporal muzzles
 		[
@@ -498,7 +520,17 @@ private _all_weapons_items_blufor = [
 		],
 		// lieutenant muzzles
 		[
-			"muzzle_snds_B", "muzzle_snds_H","muzzle_snds_L", "muzzle_snds_M", "muzzle_snds_acp"
+			"muzzle_snds_B",
+			"muzzle_snds_H",
+			"muzzle_snds_L",
+			"muzzle_snds_M",
+			"muzzle_snds_acp",
+			"rhsusf_acc_aac_762sd_silencer",
+			"rhsusf_acc_aac_762sdn6_silencer",
+			"rhsusf_acc_aac_scarh_silencer",
+			"rhsusf_acc_aac_m14dcqd_silencer",
+			"rhsusf_acc_aac_m14dcqd_silencer_d",
+			"rhsusf_acc_aac_m14dcqd_silencer_wd"
 		],
 		// captain muzzles
 		[
@@ -534,7 +566,6 @@ private _all_weapons_items_blufor = [
 			"rhs_uniform_g3_mc",
 			"rhs_uniform_g3_rgr",
 			"rhs_uniform_g3_tan",
-
 			"rhsusf_ach_bare",
 			"rhsusf_ach_bare_des",
 			"rhsusf_ach_bare_des_ess",
@@ -716,7 +747,12 @@ private _all_weapons_items_blufor = [
 			"rhsusf_oakley_goggles_ylw",
 			"rhs_goggles_yellow",
 			"rhs_goggles_clear",
-			"rhs_ess_black"
+			"rhs_ess_black",
+			"U_B_PilotCoveralls",
+			"H_PilotHelmetFighter_B",
+			"H_CrewHelmetHeli_B",
+			"H_PilotHelmetHeli_B",
+			"U_B_HeliPilotCoveralls"
 		],
 		// corporal uniforms
 		[
@@ -1277,7 +1313,6 @@ private _all_weapons_items_opfor = [
 			"rhs_6b7_1m_emr",
 			"rhs_6b7_1m_bala1_emr",
 			"rhs_6b7_1m_bala2_emr",
-
 			"rhsusf_oakley_goggles_blk",
 			"rhsusf_oakley_goggles_ylw",
 			"rhs_goggles_yellow",
@@ -1285,7 +1320,6 @@ private _all_weapons_items_opfor = [
 			"rhs_ess_black",
 			"rhs_balaclava1_olive",
 			"rhs_scarf",
-
 			"rhs_beret_vdv1",
 			"rhs_beret_vdv2",
 			"rhs_beret_vdv3",
