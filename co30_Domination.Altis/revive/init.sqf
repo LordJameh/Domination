@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "revive\init.sqf"
 #include "..\x_setup.sqf"
 
 if (!hasInterface) exitWith {};
@@ -21,6 +20,8 @@ if (isNil {player getVariable "xr_pluncon"}) then {
 player setVariable ["xr_pisinaction", false];
 player setVariable ["xr_dragged", false];
 player setVariable ["xr_isdead", false];
+
+d_uncon_finally_over = false;
 
 xr_uncon_units = [];
 xr_death_pos = [];

@@ -1,8 +1,10 @@
 // by Xeno
-#define THIS_FILE "fn_csidechat.sqf"
+//#define __DEBUG__
 #include "..\x_setup.sqf"
 
 if (!hasInterface) exitWith {};
+
+__TRACE_1("","_this")
 
 params ["_num", "_param1", "_param2", "_param3"];
 
@@ -75,6 +77,9 @@ if (_num == 10) exitWith {
 	if (_param1 == 3) exitWith {
 		[format [localize "STR_DOM_MISSIONSTRING_946", _param2], "GLOBAL"] call d_fnc_HintChatMsg;
 	};
+	if (_param1 == 99) exitWith {
+		[format [localize "STR_DOM_MISSIONSTRING_2071", _param2], "GLOBAL"] call d_fnc_HintChatMsg;
+	};
 };
 
 if (_num == 11) exitWith {
@@ -124,9 +129,12 @@ if (_num == 19) exitWith {
 };
 
 if (_num == 20) exitWith {
-	[format [localize "STR_DOM_MISSIONSTRING_507a", _param1, _param2], "GLOBAL"] call d_fnc_HintChatMsg;
-	if (_param3 == player) then {
-		[_param2, 0] spawn d_fnc_jail;
+	if (isNil "d_goto_jail") then {
+		__TRACE("Jail nil")
+		[format [localize "STR_DOM_MISSIONSTRING_507a", _param1, _param2], "GLOBAL"] call d_fnc_HintChatMsg;
+		if (_param3 == player) then {
+			[_param2, 0] spawn d_fnc_jail;
+		};
 	};
 };
 

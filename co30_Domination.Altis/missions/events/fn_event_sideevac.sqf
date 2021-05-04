@@ -1,6 +1,5 @@
 // by Xeno (modified by Longtime)
 //#define __DEBUG__
-#define THIS_FILE "fn_event_sideevac.sqf"
 #include "..\..\x_setup.sqf"
 
 #ifdef __TT__
@@ -22,7 +21,7 @@ private _mt_event_key = format ["d_X_MTEVENT_%1", d_cur_tgt_name];
 private _poss = [[[_target_center, 125]],[[_target_center, 15]]] call BIS_fnc_randomPos;
 private _x_mt_event_ar = [];
 
-private _trigger = [_poss, [225,225,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_poss, [120,120,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1;!isNil {_trigger getVariable "d_event_start"}};
 
@@ -41,6 +40,7 @@ private _distanceToEnablePilotMovement = 3; //in meters
 sleep 2;
 
 private _marker = ["d_mt_event_marker_sideevac", _poss, "ICON","ColorBlack", [1, 1], localize "STR_DOM_MISSIONSTRING_CRASH", 0, "mil_warning"] call d_fnc_CreateMarkerGlobal;
+[_marker, "STR_DOM_MISSIONSTRING_CRASH"] remoteExecCall ["d_fnc_setmatxtloc", [0, -2] select isDedicated];
 
 d_kb_logic1 kbTell [d_kb_logic2,d_kb_topic_side,"MTEventSideEvac",d_kbtel_chan];
 
@@ -52,7 +52,7 @@ if (_nposss isEqualTo []) then {_nposss = _poss};
 private _pilot1 = _owngroup1 createUnit [d_sm_pilottype, _nposss, [], 0, "NONE"];
 [_pilot1] joinSilent _owngroup1;
 _x_mt_event_ar pushBack _pilot1;
-[_pilot1, 30] call d_fnc_nodamoffdyn;
+[_pilot1, 120] call d_fnc_nodamoffdyn;
 __TRACE_1("","_pilot1")
 _pilot1 call d_fnc_removenvgoggles_fak;
 [_pilot1, getPos _pilot1] call d_fnc_setposagls;
@@ -74,7 +74,7 @@ __TRACE_1("","_owngroup2")
 private _pilot2 = _owngroup2 createUnit [d_sm_pilottype, getPos _pilot1, [], 0, "NONE"];
 [_pilot2] joinSilent _owngroup2;
 _x_mt_event_ar pushBack _pilot2;
-[_pilot2, 30] call d_fnc_nodamoffdyn;
+[_pilot2, 120] call d_fnc_nodamoffdyn;
 __TRACE_1("","_pilot2")
 _pilot2 call d_fnc_removenvgoggles_fak;
 [_pilot2, getPos _pilot2] call d_fnc_setposagls;
@@ -130,9 +130,6 @@ _pilot1 disableAI "PATH";
 _pilot1 setDamage 0.5;
 _pilot2 disableAI "PATH";
 _pilot2 setDamage 0.5;
-
-_owngroup1 deleteGroupWhenEmpty true;
-_owngroup2 deleteGroupWhenEmpty true;
 
 if (d_with_dynsim == 0) then {
 	[_owngroup1] spawn d_fnc_enabledynsim;

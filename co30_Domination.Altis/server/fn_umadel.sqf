@@ -1,10 +1,11 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_umadel.sqf"
 #include "..\x_setup.sqf"
 
 params ["_opos", "_radpatr"];
 _opos =+ _opos;
+
+_radpatr = _radpatr + 50;
 
 sleep 5;
 
@@ -37,7 +38,7 @@ private _mmarkers = [];
 		};
 	};
 	sleep 0.01;
-} forEach (allMapMarkers select {_x find "_USER_DEFINED #" > -1});
+} forEach (allMapMarkers select {"_USER_DEFINED #" in _x});
 __TRACE_1("","_musers")
 __TRACE_1("","_mmarkers")
 if (_musers isNotEqualTo []) then {
@@ -47,5 +48,6 @@ if (_musers isNotEqualTo []) then {
 				deleteMarker _x;
 			} forEach _x;
 		};
+		sleep 0.1;
 	} forEach _mmarkers;
 };

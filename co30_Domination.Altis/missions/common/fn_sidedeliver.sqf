@@ -1,5 +1,4 @@
 //#define __DEBUG__
-#define THIS_FILE "fn_sidedeliver.sqf"
 #include "..\..\x_setup.sqf"
 
 if (!isServer) exitWith {};
@@ -20,13 +19,17 @@ clearWeaponCargoGlobal _vec;
 clearMagazineCargoGlobal _vec;
 clearBackpackCargoGlobal _vec;
 clearItemCargoGlobal _vec;
-_vec addItemCargoGlobal ["ToolKit",1];
 call {
 	if (d_gmcwg) exitWith {
 		_vec addItemCargoGlobal ["gm_ge_army_gauzeBandage", 3];
 		_vec addItemCargoGlobal ["gm_ge_army_burnBandage", 3];
 	};
+	if (d_vn) exitWith {
+		_vec addItemCargoGlobal ["vn_b_item_firstaidkit", 3];
+		_vec addItemCargoGlobal ["vn_b_item_toolkit", 1];
+	};
 	_vec addItemCargoGlobal ["FirstAidKit", 3];
+	_vec addItemCargoGlobal ["ToolKit", 1];
 };
 _vec setVariable ["d_liftit", true, true];
 d_x_sm_vec_rem_ar pushBack _vec;
@@ -75,6 +78,7 @@ private _reached_base = false;
 private _markern = format ["d_smvecposc_%1", _vec call d_fnc_markername];
 
 [_markern, [0, 0, 0], "ICON", "ColorBlue", [0.5, 0.5], localize "STR_DOM_MISSIONSTRING_1584" , 0, "mil_dot"] call d_fnc_CreateMarkerGlobal;
+[_markern, "STR_DOM_MISSIONSTRING_1584"] remoteExecCall ["d_fnc_setmatxtloc", [0, -2] select isDedicated];
 	
 while {alive _vec && {!_reached_base && {!d_sm_resolved}}} do {
 	if ((call d_fnc_PlayersNumber) > 0) then {

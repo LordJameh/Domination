@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_recruitbuttonaction.sqf"
 #include "..\x_setup.sqf"
 
 if (player getVariable "d_recdbusy") exitWith {};
@@ -9,8 +8,10 @@ disableSerialization;
 
 player setVariable ["d_recdbusy", true];
 
-if (d_current_ai_num >= d_max_ai) exitWith {
-	[playerSide, "HQ"] sideChat format [localize "STR_DOM_MISSIONSTRING_694", d_max_ai];
+private _max_ai = [round linearConversion [0, 20, 21 - count d_allplayers, 0, d_max_ai, true], d_max_ai] select !d_ai_dyn_recruit;
+
+if (d_current_ai_num >= _max_ai) exitWith {
+	[playerSide, "HQ"] sideChat format [localize "STR_DOM_MISSIONSTRING_694", _max_ai];
 	player setVariable ["d_recdbusy", false];
 };
 
@@ -110,7 +111,7 @@ if (!d_with_ace) then {
 	_unit addEventhandler ["handleDamage", {call d_fnc_handledamageai}];
 };
 
-if (d_current_ai_num == d_max_ai) then {
+if (d_current_ai_num == _max_ai) then {
 	(_dispx displayCtrl 1010) ctrlShow false;
 };
 
@@ -136,7 +137,7 @@ private _index = _control lbAdd ([_torecruit, "CfgVehicles"] call d_fnc_GetDispl
 _control lbSetPicture [_index, _pic];
 _control lbSetColor [_index, [1, 1, 0, 0.8]];
 
-(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, d_max_ai];
+(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, _max_ai];
 
 if (!d_with_ranked) then {
 	private _code = if (!d_with_ace) then {

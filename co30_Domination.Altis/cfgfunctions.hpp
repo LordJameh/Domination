@@ -204,6 +204,10 @@ class cfgFunctions {
 			addc(updatemove);
 			addc(chopcheck);
 			addc(gimmick);
+			addc(forgive);
+			addc(aophfytk);
+			addc(setmatxtloc);
+			addc(build_ranked_gear);
 		};
 		class Dom_UI {
 			file = "clientui";
@@ -270,6 +274,8 @@ class cfgFunctions {
 			addc(correctwname);
 			addc(addto3drawar);
 			addc(optioncontrol);
+			addc(forgive_keh);
+			addc(forgive_timehandler);
 		};
 		class Dom_Common {
 			file = "common";
@@ -362,6 +368,11 @@ class cfgFunctions {
 			addc(LowGear_Init);
 			addc(LowGearOn);
 			addc(seapatrol);
+			addc(rscdisplaydynamicgroups);
+			addc(dynamicgroups);
+			addc(dgkup);
+			addc(dgkdown);
+			addc(dgefmeh);
 		};
 		class Dom_cba_Scripts {
 			file = "cba";
@@ -436,6 +447,8 @@ class cfgFunctions {
 			addc(event_guerrilla_infantry_incoming);
 			addc(event_rabbitrescue);
 			addc(event_markedfordeath);
+			addc(event_sidevipdefend);
+			addc(event_sideprisonerdefuse);
 		};
 		class Dom_Server {
 			file = "server";
@@ -495,7 +508,6 @@ class cfgFunctions {
 			addc(dpcpbv);
 			addc(addceo);
 			addc(buildingchanged);
-			addc(rebbuil);
 			addc(saveprogress2db);
 			addc(targetclearm);
 			addc(mhqmsg);
@@ -568,9 +580,7 @@ class cfgFunctions {
 			addc(handleobservers);
 			addc(handleattackgroups);
 			addc(cgraa);
-			addc(dodelintelu);
-			addc(xdelct);
-			addc(doexechcf);
+			addc(delstuff);
 			addc(getflatarea);
 			addc(getmtmission);
 			addc(mchelper);
@@ -623,6 +633,12 @@ class cfgFunctions {
 			addc(addheadshot);
 			addc(v_hd);
 			addc(wa_ace_vec);
+			addc(exectkpd);
+			addc(bv_check);
+			addc(makenewtower);
+			addc(garrisonUnits);
+			addc(deleteempty);
+			addc(utowerkilled);
 		};
 		class Dom_PrePostInit {
 			file = "init";
@@ -689,6 +705,7 @@ class cfgFunctions {
 			addc(bloodpool);
 			addc(hasfak);
 			addc(phogl);
+			addc(setmatxtloc);
 		};
 	};
 	class Dom_AR {

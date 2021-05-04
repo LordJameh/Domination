@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_airtaxiserver.sqf"
 #include "..\x_setup.sqf"
 #define __del \
 {_vec deleteVehicleCrew _x} forEach _crew;\
@@ -37,7 +36,6 @@ __TRACE_2("","_sidep","_dstart_pos")
 private _grp = [_sidep] call d_fnc_creategroup;
 private _spos = [_dstart_pos # 0, _dstart_pos # 1, 300];
 private _veca = [_spos, _spos getDir _playerpos, _ttype, _grp, false, true] call d_fnc_spawnVehicle;
-_grp deleteGroupWhenEmpty true;
 _veca params ["_vec", "_crew"];
 if (d_with_dynsim == 0) then {
 	_vec setVariable ["d_nodyn", true];
@@ -72,7 +70,8 @@ _unit action ["CollisionLightOn", _vec];
 if (sunOrMoon != 1) then {_vec setPilotLight true};
 _vec setCollisionLight true;
 
-["d_airtaxi_marker", _vec, "ICON", (switch (_sidep) do {case opfor: {"ColorEAST"};case blufor: {"ColorWEST"};case independent: {"ColorGUER"};default {"ColorCIV"};}), [1,1], "Air Taxi", 0, (switch (_sidep) do {case blufor: {"b_air"};case opfor: {"o_air"};default {"n_air"};})] call d_fnc_CreateMarkerGlobal;
+["d_airtaxi_marker", _vec, "ICON", (switch (_sidep) do {case opfor: {"ColorEAST"};case blufor: {"ColorWEST"};case independent: {"ColorGUER"};default {"ColorCIV"};}), [1,1], localize "STR_DOM_MISSIONSTRING_535", 0, (switch (_sidep) do {case blufor: {"b_air"};case opfor: {"o_air"};default {"n_air"};})] call d_fnc_CreateMarkerGlobal;
+["d_airtaxi_marker", "STR_DOM_MISSIONSTRING_535"] remoteExecCall ["d_fnc_setmatxtloc", [0, -2] select isDedicated];
 
 private _vecdist = _vec distance2D _nendpos;
 __TRACE_1("","_vecdist")

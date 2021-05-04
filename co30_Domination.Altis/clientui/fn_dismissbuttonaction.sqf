@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_dismissbuttonaction.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE("dismissbuttonaction")
@@ -44,5 +43,5 @@ if (d_current_ai_num == 0) then {
 	(_dispx displayCtrl 1012) ctrlShow false;
 };
 
-(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, d_max_ai];
+(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, [round linearConversion [0, 20, 21 - count d_allplayers, 0, d_max_ai, true], d_max_ai] select !d_ai_dyn_recruit];
 player setVariable ["d_recdbusy", false];

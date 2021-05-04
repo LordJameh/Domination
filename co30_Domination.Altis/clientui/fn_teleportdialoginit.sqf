@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_teleportdialoginit.sqf"
 #include "..\x_setup.sqf"
 
 disableSerialization;
@@ -35,6 +34,18 @@ if (_dtype == 0) then {
 	} else {
 		__CTRL(3000) ctrlShow false;
 		__CTRL(1000) ctrlShow false;
+	};
+	__TRACE_1("","d_tk_forgive")
+	if (d_tk_forgive == 1 || {d_no_teamkill == 0}) then {
+		__CTRL(123456) ctrlShow false;
+		__CTRL(123457) ctrlShow false;
+	} else {
+		if (d_no_teamkill == 1 && {d_tk_forgive == 0}) then {
+			__CTRL(123456) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_2064", name d_forgive];
+			d_forgive_keyeh = _display displayAddEventHandler ["KeyDown", {call d_fnc_forgive_keh}];
+			__TRACE_1("","d_forgive_keyeh")
+			_display spawn d_fnc_forgive_timehandler;
+		};
 	};
 };
 

@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_dismissallbuttonaction.sqf"
 #include "..\x_setup.sqf"
 
 if (player getVariable "d_recdbusy") exitWith {};
@@ -23,7 +22,7 @@ private _dispx = uiNamespace getVariable "d_AIRecruitDialog";
 (_dispx displayCtrl 1012) ctrlShow false;
 d_current_ai_num = 0;
 
-(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, d_max_ai];
+(_dispx displayCtrl 1030) ctrlSetText format [localize "STR_DOM_MISSIONSTRING_693", d_current_ai_num, [round linearConversion [0, 20, 21 - count d_allplayers, 0, d_max_ai, true], d_max_ai] select !d_ai_dyn_recruit];
 
 private _ctrl = _dispx displayCtrl 1010;
 if (!ctrlShown _ctrl) then {

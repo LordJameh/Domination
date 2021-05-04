@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_serverinit.sqf"
 #include "..\x_setup.sqf"
 
 d_delvecsmt = [];
@@ -24,7 +23,10 @@ d_x_mt_event_types = [
 	"POW_RESCUE",
 	//"GUERRILLA_TANKS", //not in the random events list, guerrilla tanks event depends on presence of guerrilla infantry
 	"GUERRILLA_INFANTRY",
-	"RABBIT_RESCUE"
+	"RABBIT_RESCUE",
+	"MARKED_FOR_DEATH",
+	"RESCUE_DEFEND",
+	"RESCUE_DEFUSE"
 ];
 d_x_mt_event_ar = [];
 d_x_mt_event_pos = [];

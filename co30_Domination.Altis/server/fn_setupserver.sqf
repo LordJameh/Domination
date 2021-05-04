@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_setupserver.sqf"
 #include "..\x_setup.sqf"
 
 if (!isServer) exitWith {};
@@ -95,7 +94,7 @@ if (d_MissionType == 2) then {
 
 0 spawn d_fnc_cleanerfnc;
 
-diag_log ["Internal D Version: 4.45"];
+diag_log ["Internal D Version: 4.49"];
 
 private _av_check_fnc = {
 	_this addEventHandler ["handleDamage", {call d_fnc_pshootatarti;0}];

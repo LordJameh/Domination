@@ -1,10 +1,11 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_mtrestkilled1.sqf"
 #include "..\x_setup.sqf"
 
 d_mt_mobile_hq_down = true;
-if (!d_mt_done) then {
+private _mt_done = (_this # 0) getVariable ["d_mt_done", false];
+__TRACE_1("","_mt_done")
+if (!_mt_done) then {
 #ifndef __TT__
 	[53] call d_fnc_DoKBMsg;
 #else
@@ -18,7 +19,7 @@ if (!d_mt_done) then {
 	deleteVehicle _this;
 };
 (_this # 0) removeAllEventHandlers "killed";
-if (!d_mt_done) then {
+if (!_mt_done) then {
 	private _killer = _this # 2;
 	if (isNull _killer) then {
 		if (!d_with_ace) then {

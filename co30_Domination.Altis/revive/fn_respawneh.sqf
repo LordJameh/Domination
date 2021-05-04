@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_respawneh.sqf"
 #include "..\x_macros.sqf"
 
 __TRACE("Start")
@@ -49,7 +48,7 @@ _this spawn {
 		if (!_norm_resp) then {
 			0 spawn xr_fnc_uncon;
 			if (xr_with_marker) then {
-				[player, getPosWorld player] remoteExecCall ["xr_fnc_addmarker", 2];
+				[player, getPosWorld player, xr_strpldead] remoteExecCall ["xr_fnc_addmarker", 2];
 			};
 		} else {
 			__TRACE("spawning go uncon")
@@ -92,18 +91,18 @@ if (!isNil {player getVariable "xr_dragged"}) then {
 	waitUntil {bis_fnc_feedback_allowPP || {time > _etime}};
 	bis_fnc_feedback_allowPP = false;
 };
-player setDamage 0;
-bis_fnc_feedback_burningTimer = 0;
-player enableAttack false;
-player setFatigue 0;
+//player setDamage 0;
+//bis_fnc_feedback_burningTimer = 0;
+//player enableAttack false;
+//player setFatigue 0;
 
-if (d_enablefatigue == 0) then {
-	player enableFatigue false;
-};
+//if (d_enablefatigue == 0) then {
+//	player enableFatigue false;
+//};
 
-if (d_enablesway == 0) then {
-	player setCustomAimCoef 0.1;
-};
+//if (d_enablesway == 0) then {
+//	player setCustomAimCoef 0.1;
+//};
 
 player removeEventHandler ["handleDamage", _tmpeh];
 

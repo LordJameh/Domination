@@ -13,13 +13,15 @@
 /co40_Domination.Stratis/*
 /co40_Domination.Takistan/*
 /co40_Domination.Tanoa/*
-/co40_Domination.WL_Rosche/*
+/co40_Domination.Cam_Lao_Nam/*
 /co40_MP_Paradrop.Chernarus/*
 /co50_AirCavA3.Chernarus/*
 /co20_HighMountains.Sara/*
 /dom_maker/*.pbo
 /dom_maker/DePbo.dll
 /dom_maker/MakePbo.exe
+/dom_maker/ArmaScriptCompiler.exe
+/dom_maker/libcsqfvm.dll
 co30_Domination.Altis.7z
 /co30_Domination.Altis - Kopie/*
 /co30_Domination.Altis - Copy/*
@@ -29,5 +31,6 @@ co30_Domination.Altis.7z
 /~co30_Domination.Altis/*
 /co40_Domination.cup_chernarus_A3/*
 /co30_Domination.song_bin_tanh/*
+/co40_Domination.Cam_Lao_Nam/*
 todo.txt
 dom_maker/DePbo64.dll

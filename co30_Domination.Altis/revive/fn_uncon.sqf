@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_uncon.sqf"
 #include "..\x_macros.sqf"
 
 if (!hasInterface) exitWith {};
@@ -46,7 +45,7 @@ xr_u_remactions = false;
 xr_u_nextcrytime = time + 15 + (random 15);
 if (xr_with_marker) then {
 	__TRACE("creating marker")
-	[player, getPosWorld player] remoteExecCall ["xr_fnc_addmarker", 2];
+	[player, getPosWorld player, xr_strpldead] remoteExecCall ["xr_fnc_addmarker", 2];
 };
 xr_u_xxstarttime = time + 40;
 xr_u_plposm = getPosWorld player;
@@ -57,6 +56,8 @@ xr_u_doend_of = false;
 false call xr_fnc_nearplayercheck;
 
 xr_uncon_units pushBack player;
+
+d_uncon_finally_over = false;
 
 __TRACE("starting main uncon loop")
 
@@ -144,6 +145,7 @@ __TRACE("starting main uncon loop")
 				d_current_ai_units = [];
 				d_current_ai_num = 0;
 			};
+			d_uncon_finally_over = true;
 		};
 		{
 			player remoteExecCall ["xr_fnc_announcenearrem", _x];

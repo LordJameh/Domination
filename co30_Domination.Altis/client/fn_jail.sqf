@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_jail.sqf"
 #include "..\x_setup.sqf"
 
 d_goto_jail = true;
@@ -19,7 +18,13 @@ if (_enhmm) then {
 };
 
 if (!alive player) then {
-	waitUntil {alive player};
+	waitUntil {sleep 0.3; alive player};
+};
+
+if (player getVariable "xr_pluncon") then {
+	xr_u_doend_of = true;
+	waitUntil {d_uncon_finally_over};
+	d_uncon_finally_over = false;
 };
 
 cutText [localize "STR_DOM_MISSIONSTRING_1999", "BLACK", 0];
@@ -39,7 +44,7 @@ private _laodout =+ getUnitLoadout player;
 player setUnitLoadout (configFile >> "EmptyLoadout");
 
 private _jailpos = if (d_cur_tgt_pos isNotEqualTo []) then {
-	[d_FLAG_BASE, 800, 10000, 3, 0, 0.3, 0, [[d_cur_tgt_pos, 1000]]] call d_fnc_findsafepos
+	[d_FLAG_BASE, 800, 10000, 3, 0, 0.3, 0, [[d_cur_tgt_pos, 1000, 1000, 0, false]]] call d_fnc_findsafepos
 } else {
 	[d_FLAG_BASE, 800, 10000, 3, 0, 0.3] call d_fnc_findsafepos
 };
@@ -91,17 +96,22 @@ sleep 0.1;
 
 private _movecheck_fnc = _pmovepos spawn {
 	scriptname "spawn jail3";
+	private _notfirst = false;
 	while {true} do {
 		if (player distance _this > 12) then {
 			player setPos _pmovepos;
-			(getPlayerUID player) remoteExecCall ["d_fnc_incjail", 2];
-			d_player_jescape = d_player_jescape + 1;
-			if (d_player_jescape > 10) then {
-				0 spawn {
-					scriptname "spawn jail4";
-					"d_jescape" cutText [format ["<t color='#ffffff' size='2'>%1</t>", localize "STR_DOM_MISSIONSTRING_2043"], "PLAIN DOWN", -1, true, true];
-					endMission "End2";
-					forceEnd;
+			if (!_notfirst) then {
+				_notfirst = true;
+				(getPlayerUID player) remoteExecCall ["d_fnc_incjail", 2];
+				d_player_jescape = d_player_jescape + 1;
+				if (d_player_jescape > 10) then {
+					0 spawn {
+						scriptname "spawn jail4";
+						"d_jescape" cutText [format ["<t color='#ffffff' size='2'>%1</t>", localize "STR_DOM_MISSIONSTRING_2043"], "PLAIN DOWN", -1, true, true];
+						sleep 5;
+						endMission "End2";
+						forceEnd;
+					};
 				};
 			};
 		};

@@ -1,6 +1,5 @@
 // by Xeno (modified by Longtime)
 //#define __DEBUG__
-#define THIS_FILE "fn_event_sideprisoners.sqf"
 #include "..\..\x_setup.sqf"
 
 // Rescue captive friendly soldiers guarded by specops.  If the specops are injured they will kill the hostages.
@@ -20,7 +19,7 @@ private _mt_event_key = format ["d_X_MTEVENT_%1", d_cur_tgt_name];
 private _poss = [[[_target_center, 125]],[[_target_center, 15]]] call BIS_fnc_randomPos;
 private _x_mt_event_ar = [];
 
-private _trigger = [_poss, [225,225,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_poss, [160,160,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1;!isNil {_trigger getVariable "d_event_start"}};
 
@@ -30,8 +29,6 @@ publicVariable "d_mt_event_messages_array";
 
 d_kb_logic1 kbTell [d_kb_logic2,d_kb_topic_side,"MTEventSidePrisoners",d_kbtel_chan];
 d_kb_logic1 kbTell [d_kb_logic2,d_kb_topic_side,"MTEventDetonatePresent",d_kbtel_chan];
-
-private _marker = ["d_mt_event_marker_sideprisoners", _poss, "ICON","ColorBlack", [1, 1], localize "STR_DOM_MISSIONSTRING_PRISONERSANDEXPLOSIVES", 0, "mil_unknown"] call d_fnc_CreateMarkerGlobal;
 
 private _prisonerGroup = [d_own_side] call d_fnc_creategroup;
 
@@ -64,8 +61,6 @@ _pilot1 disableAI "RADIOPROTOCOL";
 _pilot1 forceSpeed 0;
 (leader _prisonerGroup) setSkill 1;
 _prisonerGroup allowFleeing 0;
-_prisonerGroup deleteGroupWhenEmpty true;
-
 
 if (d_with_dynsim == 0) then {
 	[_prisonerGroup] spawn d_fnc_enabledynsim;
@@ -91,26 +86,33 @@ private _enemyGuardGroup = (["specops", 0, "allmen", 1, _nposss , 5, false, true
 //find a suitable building and occupy
 _buildings_array_sorted_by_distance = [[_poss, 200, nil, (count _allActors)] call d_fnc_getbuildings, _poss] call d_fnc_sortarraybydistance;
 private _unitsNotGarrisoned = [];
+private _bldg = nil;
+private _marker = nil;
+
 {
 	//dry run to find a suitable building
 	_unitsNotGarrisoned = [getPos _x, _allActors, -1, false, false, true, false, 2, true, true, true] call d_fnc_Zen_OccupyHouse;
 	if (count _unitsNotGarrisoned == 0) exitWith {
 		// building is suitable
+		_bldg = _x;
 		_unitsNotGarrisoned = [getPos _x, _allActors, -1, false, false, true, false, 2, true, true] call d_fnc_Zen_OccupyHouse;
 	};
 
 } forEach _buildings_array_sorted_by_distance;
+
+if (!isNil "_bldg") then {
+	_marker = ["d_mt_event_marker_sideprisoners", getPos _bldg, "ICON","ColorBlack", [1, 1], localize "STR_DOM_MISSIONSTRING_PRISONERSANDEXPLOSIVES", 0, "mil_triangle"] call d_fnc_CreateMarkerGlobal;
+    [_marker, "STR_DOM_MISSIONSTRING_PRISONERSANDEXPLOSIVES"] remoteExecCall ["d_fnc_setmatxtloc", [0, -2] select isDedicated];
+};
 
 {
 	diag_log [format ["fn_event_sideprisoners: failed to garrison and will remain in starting position: %1", _x]];
 } forEach _unitsNotGarrisoned;
 
 private _all_dead = false;
-private _isExecutePrisoners = false;
 private _is_rescued = false;
 
-// this correct?
-while {sleep 1; !d_mt_done; !_is_rescued} do {
+while {sleep 3.14; !d_mt_done; !_is_rescued} do {
 	if (!alive _pilot1) exitWith { _all_dead = true };
 	
 	if (({alive _x} count units _enemyGuardGroup) > 0) then {
@@ -124,7 +126,7 @@ while {sleep 1; !d_mt_done; !_is_rescued} do {
 				_x forceSpeed -1;
 			} forEach (units _enemyGuardGroup);
 			// another brief delay, players must kill all guards or an explosion will occur
-			sleep 5;
+			sleep 7;
 			if (({alive _x} count units _enemyGuardGroup) > 0) then {
 				// not all of the guards were killed so a suicide bomb is triggered
 				_bomb_type = "Rocket_04_HE_F"; //TODO: bigger??
@@ -147,8 +149,6 @@ while {sleep 1; !d_mt_done; !_is_rescued} do {
 			// todo announce player
 		};
 	};
-	
-	sleep 3.14;
 };
 
 if (_all_dead) then {

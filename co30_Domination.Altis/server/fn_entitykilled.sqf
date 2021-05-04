@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_entitykilled.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE_1("","_this")
@@ -11,7 +10,7 @@ if (d_database_found) then {
 	if (_obj isKindOf "CAManBase" && {_obj getHitIndex 2 == 1 || {_obj getHitIndex 0 == 1}}) then {
 		private _insti = _this # 2;
 		if (!isNull _insti && {isNull objectParent _insti && {isPlayer _insti}}) then {
-			_insti call d_fnc_addheadshot;
+			_insti spawn d_fnc_addheadshot;
 		};
 	};
 };
@@ -55,6 +54,12 @@ if (!d_with_ace || {d_with_ace && {local _obj}}) then {
 };
 if (!isNil "d_is_hc") exitWith {true};
 #endif
+
+if !(_obj isKindOf "CAManBase") then {
+	if (isPlayer (_this # 2)) then {
+		_this spawn d_fnc_bv_check;
+	};
+};
 
 if (_ar # 3 == 1) then {
 	_obj setVariable ["d_dead", true];

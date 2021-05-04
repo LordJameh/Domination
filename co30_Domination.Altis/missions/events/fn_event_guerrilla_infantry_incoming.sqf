@@ -1,6 +1,5 @@
 // by Longtime
 //#define __DEBUG__
-#define THIS_FILE "fn_event_guerrilla_infantry_incoming.sqf"
 #include "..\..\x_setup.sqf"
 
 #ifdef __TT__
@@ -37,7 +36,7 @@ if (_townNearbyPos isEqualTo []) exitWith {
 
 private _x_mt_event_ar = [];
 
-private _trigger = [_target_center, [600,600,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_target_center, [475,475,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1; !isNil {_trigger getVariable "d_event_start"}};
 
@@ -92,7 +91,6 @@ private _guerrillaBaseSkill = 0.35;
 		_x setSkill ["commanding", 1];
 		_x_mt_event_ar pushBack _x;
 	} forEach _units;
-	_newgroup deleteGroupWhenEmpty true;
 	_newgroups pushBack _newgroup;
 	if (d_with_dynsim == 0) then {
 		[_newgroup, 0] spawn d_fnc_enabledynsim;

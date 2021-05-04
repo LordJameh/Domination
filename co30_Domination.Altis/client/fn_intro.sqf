@@ -1,5 +1,4 @@
 // by Xeno
-#define THIS_FILE "fn_intro.sqf"
 #include "..\x_setup.sqf"
 
 if (!hasInterface) exitWith {};
@@ -16,6 +15,7 @@ while {true} do {
 };
 sleep 0.01;
 1 fadeSound 1;
+1 fadeEnvironment 1;
 
 d_still_in_intro = true;
 
@@ -36,7 +36,11 @@ private _pspsxx = getPosASL player;
 "dynamicBlur" ppEffectAdjust [0.0];
 "dynamicBlur" ppEffectCommit 15;
 
-playMusic "LeadTrack01b_F";
+if (!d_vn) then {
+	playMusic "LeadTrack01b_F";
+} else {
+	playMusic "vn_drafted";
+};
 
 if (sunOrMoon < 0.99) then {camUseNVG true};
 
@@ -115,7 +119,7 @@ switch (d_MissionType) do {
 	};
 };
 
-0 = [parseText format [ "<br/><t font='PuristaMedium' align='left' size='2.3'> Welcome to Domination! 4</t><br/>  <t align='left' size='1'>  Version 4.45  </t>"], [safeZoneX + 0.1,safeZoneY + safeZoneH - 0.2,0.9,0.3], nil, 5, 1, 0]  spawn BIS_fnc_textTiles;
+0 = [parseText format [ "<br/><t font='PuristaMedium' align='left' size='2.3'> Welcome to Domination! 4</t><br/>  <t align='left' size='1'>  Version 4.49  </t>"], [safeZoneX + 0.1,safeZoneY + safeZoneH - 0.2,0.9,0.3], nil, 5, 1, 0]  spawn BIS_fnc_textTiles;
 
 _camera camSetTarget player;
 _p_tpos = [_pspsxx # 0, _pspsxx # 1, (player modelToWorld [0,0,2]) # 2];
@@ -152,6 +156,13 @@ enableRadio true;
 showChat true;
 "dynamicBlur" ppEffectEnable false;
 
+4 fadeMusic 0;
+0 spawn {
+	scriptName "spawn_music_intro";
+	sleep 300;
+	0 fadeMusic 1;
+};
+
 #ifndef __IFA3LITE__
 if (sunOrMoon < 0.99 && {d_without_nvg == 1 && {player call d_fnc_hasnvgoggles}}) then {player action ["NVGoggles", player]};
 #endif
@@ -173,7 +184,9 @@ if (!_uidcheck_done && {d_uid_reserved_slots isNotEqualTo []} && {d_uids_for_res
 };
 
 d_still_in_intro = false;
+#ifndef __VN__
 enableEnvironment [false, true];
+#endif
 
 sleep 5;
 
@@ -201,10 +214,6 @@ sleep 3;
 
 if (d_WithMHQTeleport == 0) then {
 	"d_introtxt2" cutText [format ["<t color='#ff0000' size='2'>%1</t>", localize "STR_DOM_MISSIONSTRING_1988"], "PLAIN DOWN", -1, true, true];
-};
-
-if (name player == "Error: No unit" || {!isPlayer player}) then {
-	hintC "Please rejoin again!!!! Your game has not connected correctly!!!!!";
 };
 
 diag_log [diag_frameno, diag_ticktime, time, "Dom intro ended"];

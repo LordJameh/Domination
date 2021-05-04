@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_mthardtargetkilled.sqf"
 #include "..\x_setup.sqf"
 
 d_mt_spotted = false;
@@ -33,7 +32,11 @@ if (!isNull _killer && {_killer call d_fnc_isplayer}) then {
 #endif
 (_this # 0) spawn {
 	scriptName "spawn checkmthardtarget";
-	sleep (60 + random 60);
+	if (isNil {_this getVariable "d_faster"}) then {
+		sleep (60 + random 60);
+	} else {
+		sleep 1;
+	};
 	_this setDamage 0;
 	deleteVehicle _this;
 };
